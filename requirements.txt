@@ -1,3 +1,4 @@
+bash==0.6
 blinker==1.9.0
 certifi==2026.5.20
 charset-normalizer==3.4.7
