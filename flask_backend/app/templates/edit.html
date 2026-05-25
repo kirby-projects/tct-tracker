@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}TCT - Editor{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="title_header">
+        <h1>TCT - Editor</h1>
+    </div>
+
+    <div class="form_div">
+        <form action="{{ url_for('edit', coach_id=coach.coach_id) }}" method="POST">
+            <label for="coach_name">Coach Name</label>
+            <input
+                    id="coach_name"
+                    name="coach_name"
+                    type="text"
+                    value="{{ coach.coach_name }}"
+                    required
+            >
+            <input class="btn btn--update" id="btn_update_submit" type="submit" value="Update Coach">
+        </form>
+    </div>
+</div>
+{% endblock %}

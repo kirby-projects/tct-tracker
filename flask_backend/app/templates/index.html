@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block head %}
 {% block title %}TCT - Home{% endblock %}
-{% endblock %}
 
 {% block body %}
 <div class="wrapper">
@@ -10,36 +8,40 @@
         <h1>Training and Certification Tracker</h1>
     </div>
 
-    <div class="add_coach">
-        <h2>Recovery Coach</h2>
-
-        {% if coaches|length < 1 %}
-            <h3>There are no Recovery Coaches. Create one here!</h3>
-        {% else %}
-            <table>
-                <tr>
-                    <th>Coach</th>
-                    <th>Added</th>
-                    <th>Action</th>
-                </tr>
-                {% for coach in coaches %}
-                <tr>
-                    <td>{{ coach.coach_name }}</td>
-                    <td>{{ coach.created.strftime('%Y-%m-%d') }}</td>
-                    <td>
-                        <a href="{{ url_for('delete', id=coach.id) }}">Delete</a><br>
-                        <a href="{{ url_for('update', id=coach.id) }}">Edit</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
-
-        <form action="{{ url_for('index') }}" method="POST">
+    <div class="form_div">
+        <form class="form" action="{{ url_for('index') }}" method="POST">
             <label for="coach">Coach Name</label>
             <input id="coach" name="coach" type="text" required>
-            <input id="btn_submit" type="submit" value="Add Coach">
+            <input class="btn btn--add" id="btn_add_submit" type="submit" value="Add Coach">
         </form>
     </div>
+    <div class="add_coach">
+        <h2>Recovery Coach List</h2>
+        {% if coaches|length < 1 %}
+        <h3>There are no Recovery Coaches. Create one here!</h3>
+        {% else %}
+        <table>
+            <tr>
+                <th>Coach</th>
+                <th>Added</th>
+                <th>Action</th>
+            </tr>
+            {% for coach in coaches %}
+            <tr>
+                <td>{{ coach.coach_name }}</td>
+                <td>{{ coach.created.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <form action="{{ url_for('delete', coach_id=coach.coach_id) }}" method="POST"
+                          style="display:inline;">
+                        <button type="submit" class="btn btn--delete">Delete</button>
+                    </form>
+                    <a href="{{ url_for('edit', coach_id=coach.coach_id) }}" class="btn btn--edit">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
 </div>
 {% endblock %}
