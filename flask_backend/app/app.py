@@ -1,5 +1,5 @@
+## Imports
 from datetime import datetime, timezone
-
 from flask import Flask, render_template, redirect, request, url_for
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
@@ -7,11 +7,13 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 Scss(app)
 
+## Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
+# Class for database structure
 class TCTContents(db.Model):
     coach_id = db.Column(db.Integer, primary_key=True)
     coach_name = db.Column(db.String(100), nullable=False)
@@ -23,13 +25,16 @@ class TCTContents(db.Model):
     )
 
     def __repr__(self):
+        """method prints an object as a string"""
         return f"Coach {self.coach_id} {self.coach_name}"
 
 
+## Database creation if not exist and inserts missing tables
 with app.app_context():
     db.create_all()
 
 
+# Create routes
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index.html', methods=['GET', 'POST'])
 def index():
@@ -87,5 +92,6 @@ def edit(coach_id):
     return render_template('edit.html', coach=coach)
 
 
+# Run app
 if __name__ == "__main__":
     app.run(debug=True)
