@@ -11,6 +11,10 @@ $accent-blue: #1565c0;
 $accent-blue-hover: #0d47a1;
 $accent-red: #d32f2f;
 $accent-red-hover: #c62828;
+$accent-teal: #38ABA1;
+$accent-teal-hover: #277D75;
+$accent-orange: #D1B143;
+$accent-orange-hover: #AB9238;
 $shadow-soft: 0 10px 24px rgba(15, 23, 42, 0.08);
 $shadow-medium: 0 12px 30px rgba(15, 23, 42, 0.12);
 
@@ -20,6 +24,7 @@ $shadow-medium: 0 12px 30px rgba(15, 23, 42, 0.12);
 
 body {
   margin: 0;
+  padding: 0;
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   background: linear-gradient(180deg, #e9eef7 0%, #f5f7fb 100%);
   color: $text-color;
@@ -209,9 +214,22 @@ input[type="text"]::placeholder {
 }
 
 .btn--update {
-  background: $accent-blue;
+  background: $accent-teal;
   color: #fff;
   min-width: 160px;
+}
+.btn--update:hover {
+  background: $accent-teal-hover;
+}
+
+.btn--cancel {
+  background: $accent-orange;
+  color: #fff;
+  margin-left: 8px;
+}
+
+.btn--cancel:hover {
+  background: $accent-orange-hover;
 }
 
 .action_cell {
@@ -231,6 +249,25 @@ a.btn {
   border-radius: inherit;
   pointer-events: none;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.footer_div {
+  text-align: center;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  padding: 14px 0;
+  border-top: 2px solid rgba(black, 0.2);
+  box-shadow: inset 0 3px $shadow-soft;
+
+  span {
+    text-decoration: underline;
+  }
+
+  .copyright {
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+    color: $text-muted;
+
+  }
 }
 
 @media (max-width: 760px) {
